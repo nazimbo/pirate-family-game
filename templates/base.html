@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My RPG Game</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/main.css') }}"
+    />
+  </head>
+  <body>
+    {% block content %}{% endblock %}
+    <script src="{{ url_for('static', filename='js/game.js') }}"></script>
+  </body>
+</html>
