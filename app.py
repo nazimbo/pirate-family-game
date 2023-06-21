@@ -1,6 +1,16 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
+from flask_mysqldb import MySQL
+
+# import database
 
 app = Flask(__name__)
+
+app.config['MYSQL_HOST'] = 'localhost'
+app.config['MYSQL_USER'] = 'root'
+app.config['MYSQL_PASSWORD'] = ''
+app.config['MYSQL_DB'] = 'pirate-family'
+
+mysql = MySQL(app)
 
 characters = [
     {"name": "Victor", "luck": 10, "id": 1,
@@ -18,6 +28,22 @@ characters = [
 def index():
     return render_template('index.html')
 
+@app.route('/main-character', methods=['GET', 'POST'])
+def create_main_character(): 
+    if request.method == 'POST':
+        data = request.form
+        cursor = mysql.connection.cursor()
+
+        query = "INSERT INTO users (name, email) VALUES (%s, %s)"
+        values = (data['name'], data['email'])
+
+        cursor.execute(query, values)
+        mysql.connection.commit()
+        cursor.close()
+
+        return 'Data inserted successfully'
+    return render_template('create-character.html')
+
 
 @app.route('/characters')
 def choose_character():
@@ -31,4 +57,4 @@ def play(id):
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
