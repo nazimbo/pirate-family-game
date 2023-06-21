@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 from flask_mysqldb import MySQL
 
 # import database
@@ -29,7 +29,12 @@ def index():
     return render_template('index.html')
 
 
-@app.route('/main-character', methods=['GET', 'POST'])
+@app.route('/main-character')
+def main_character():
+    return render_template('create-character.html')
+
+
+@app.route('/create-main-character', methods=['POST'])
 def create_main_character():
     if request.method == 'POST':
         data = request.form
@@ -42,8 +47,7 @@ def create_main_character():
         mysql.connection.commit()
         cursor.close()
 
-        return 'Data inserted successfully'
-    return render_template('create-character.html')
+        return redirect(url_for('choose_character'))
 
 
 @app.route('/characters')
