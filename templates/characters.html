@@ -6,6 +6,14 @@
     <h2>{{ character.name }}</h2>
     <img src="{{ character.image }}" />
     <p>{{character.description}}</p>
+    <p>
+        Stats:
+        <ul>
+            <li>Force: {{character.stats.force}}</li>
+            <li>Chance: {{character.stats.luck}}</li>
+            <li>Intelligence: {{character.stats.intelligence}}</li>
+            <li>Charisme: {{character.stats.charisma}}</li>
+    </p>
     <button>
       <a href="{{ url_for('play', character=character.name) }}">Choose</a>
     </button>
