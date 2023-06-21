@@ -7,7 +7,7 @@
         <img src="{{ character.image }}" />
         <p>{{character.description}}</p>
         <button>
-            <a href="{{ url_for('choose_character', character_id=character.id) }}">Choose</a>
+            <a href="{{ url_for('play', character_id=character.id) }}">Choose</a>
     </div>
 </div>
 {% endfor %} {% endblock %}

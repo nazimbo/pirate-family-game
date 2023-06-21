@@ -28,8 +28,9 @@ characters = [
 def index():
     return render_template('index.html')
 
+
 @app.route('/main-character', methods=['GET', 'POST'])
-def create_main_character(): 
+def create_main_character():
     if request.method == 'POST':
         data = request.form
         cursor = mysql.connection.cursor()
@@ -50,11 +51,11 @@ def choose_character():
     return render_template('characters.html', characters=characters)
 
 
-@app.route('/play/<int:id>')
-def play(id):
-    character = characters[id-1]
+@app.route('/playwith/<int:character_id>')
+def play(character_id):
+    character = characters[character_id-1]
     return render_template('play.html', character=character)
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
