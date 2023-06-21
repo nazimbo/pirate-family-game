@@ -2,12 +2,13 @@
 <h1>Choose Your Character</h1>
 {% for character in characters %}
 <div class="characters-box">
-    <div>
-        <h2>{{ character.name }}</h2>
-        <img src="{{ character.image }}" />
-        <p>{{character.description}}</p>
-        <button>
-            <a href="{{ url_for('play', character_id=character.id) }}">Choose</a>
-    </div>
+  <div>
+    <h2>{{ character.name }}</h2>
+    <img src="{{ character.image }}" />
+    <p>{{character.description}}</p>
+    <button>
+      <a href="{{ url_for('play', character=character.name) }}">Choose</a>
+    </button>
+  </div>
 </div>
 {% endfor %} {% endblock %}

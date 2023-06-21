@@ -55,10 +55,10 @@ def choose_character():
     return render_template('characters.html', characters=characters)
 
 
-@app.route('/playwith/<int:character_id>')
-def play(character_id):
-    character = characters[character_id-1]
-    return render_template('play.html', character=character)
+@app.route('/playwith/<character>')
+def play(character):
+
+    return render_template('play.html')
 
 
 if __name__ == '__main__':
