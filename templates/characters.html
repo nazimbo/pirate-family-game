@@ -1,8 +1,10 @@
-{% extends "base.html" %} {% block content %}
+{% extends "base.html" %}
+
+{% block content %}
 <h1>Choose Your Character</h1>
-{% for character in characters %}
-<div class="characters-box">
-  <div>
+<div class="flex justify-between">
+  {% for character in characters %}
+  <div class="characters-box">
     <h2>{{ character.name }}</h2>
     <img src="{{ character.image }}" />
     <p>{{character.description}}</p>
@@ -13,10 +15,12 @@
             <li>Chance: {{character.stats.luck}}</li>
             <li>Intelligence: {{character.stats.intelligence}}</li>
             <li>Charisme: {{character.stats.charisma}}</li>
+        </ul>
     </p>
-    <button>
+    <button class="primary-button">
       <a href="{{ url_for('play', character=character.name) }}">Choose</a>
     </button>
   </div>
+  {% endfor %}
 </div>
-{% endfor %} {% endblock %}
+{% endblock %}
