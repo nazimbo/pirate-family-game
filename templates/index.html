@@ -1,4 +1,8 @@
 {% extends "base.html" %} {% block content %}
-<h1>Welcome to My RPG Game</h1>
-<a href="{{ url_for('choose_character') }}">Start</a>
+<div class="start w-full h-full grid place-items-center">
+    <div class="absolute w-full h-full bg-black opacity-50"></div>
+    <h1 class="font-extrabold text-7xl text-yellow-400 drop-shadow-lg z-10">The Pirate Family Game</h1>
+    <a class="py-2 px-6 bg-yellow-400 font-extrabold text-xl hover:bg-yellow-300 hover:drop-shadow-lg z-10"
+        href="{{ url_for('choose_character') }}">Start</a>
+</div>
 {% endblock %}

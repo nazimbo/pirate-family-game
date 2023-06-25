@@ -11,3 +11,10 @@ a {
   color: #0275d8;
   text-decoration: none;
 }
+
+.start {
+  background-image: url(../images/famille-pirate_1600x.webp);
+  background-repeat: none;
+  background-size: cover;
+  background-position: 0 -100px;
+}

@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>My RPG Game</title>
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='css/style.css') }}"
-    />
-  </head>
-  <body>
-    {% block content %}{% endblock %}
-  </body>
+
+<head>
+  <title>My RPG Game</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="h-screen">
+  {% block content %}{% endblock %}
+</body>
+
 </html>
