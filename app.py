@@ -18,28 +18,28 @@ characters = [
         "id": 1,
         "image": "static/images/victor.jpg",
         "description": "Le roi des pirates !",
-        "stats": {"force": 6, "luck": 2, "intelligence": 3, "charisma": 9}
+        "stats": {"force": 6, "luck": 2, "intelligence": 3, "charisma": 9},
     },
     {
         "name": "Machicoulis",
         "id": 2,
         "image": "static/images/machicoulis.jpg",
         "description": "Le plus bête des membres",
-        "stats": {"force": 8, "luck": 5, "intelligence": 0, "charisme": 3}
+        "stats": {"force": 8, "luck": 5, "intelligence": 0, "charisme": 3},
     },
     {
         "name": "La Sardine",
         "id": 3,
         "image": "static/images/sardine.jpg",
         "description": "Un bras cassé au comportement mou",
-        "stats": {"force": 0, "luck": 4, "intelligence": 5, "charisme": 1}
+        "stats": {"force": 0, "luck": 4, "intelligence": 5, "charisme": 1},
     },
     {
         "name": "Dr. Spratt",
         "id": 4,
         "image": "static/images/spratt.jpg",
         "description": "Expert quand il s'agit de tricher aux jeux",
-        "stats": {"force": 2, "luck": 3, "intelligence": 7, "charisme": 4}
+        "stats": {"force": 2, "luck": 3, "intelligence": 7, "charisme": 4},
     },
 ]
 
@@ -48,47 +48,49 @@ items = [
         "name": "Carte au Trésor Ancienne",
         "id": 1,
         "luck": random.randint(1, 50),
-        "description": "Une carte détaillée qui indique les emplacements des indices et des obstacles sur le chemin du trésor."
+        "description": "Une carte détaillée qui indique les emplacements des indices et des obstacles sur le chemin du trésor.",
     },
     {
         "name": "Clé du Capitaine",
         "id": 2,
         "luck": random.randint(1, 50),
-        "description": "Une clé spéciale qui ouvre les portes verrouillées du repaire du capitaine pirate, où le trésor est gardé en sécurité."
+        "description": "Une clé spéciale qui ouvre les portes verrouillées du repaire du capitaine pirate, où le trésor est gardé en sécurité.",
     },
     {
         "name": "Longue-Vue Pirate",
         "id": 3,
         "luck": random.randint(1, 50),
-        "description": "Une longue-vue puissante pour repérer les repaires pirates, les îles secrètes et les signes cachés qui mènent au trésor."
+        "description": "Une longue-vue puissante pour repérer les repaires pirates, les îles secrètes et les signes cachés qui mènent au trésor.",
     },
     {
         "name": "Boussole Magique",
         "id": 4,
         "luck": random.randint(1, 50),
-        "description": "Une boussole spéciale qui pointe toujours vers le trésor le plus proche, même s'il est caché."
+        "description": "Une boussole spéciale qui pointe toujours vers le trésor le plus proche, même s'il est caché.",
     },
 ]
 
+# non utilisées
 def getCharacterLuck(characterName):
     for character in characters:
-        if character == characterName:
+        if character["name"] == characterName:
             return character["stats"]["luck"]
-        else:
-            return 0
+    return 0
+
 
 def getItemLuck(itemName):
     for item in items:
-        if item == itemName:
+        if item["name"] == itemName:
             return item["luck"]
-        else:
-            return 0
+    return 0
+
 
 def winCondition(luck):
     if luck >= 80:
         return True
     else:
         return False
+
 
 @app.route("/")
 def index():
@@ -130,17 +132,24 @@ def play(character):
         "id": character["id"],
         "image": character["image"],
         "description": character["description"],
-        "stats": character["stats"]
+        "stats": character["stats"],
     }
 
-    return render_template("play.html", character=character, items=items)\
+    return render_template("play.html", character=character, items=items)
+
 
 @app.route("/playwithitem/<character>/<item>")
 def play_with_item(character, item):
     selected_character = next((c for c in characters if c["name"] == character), None)
     selected_item = next((i for i in items if i["name"] == item), None)
     luck_rate = selected_character["stats"]["luck"] * selected_item["luck"]
-    return render_template("play-with-item.html", character=selected_character, item=selected_item, luck_rate=luck_rate, is_win=winCondition(luck_rate))
+    return render_template(
+        "play-with-item.html",
+        character=selected_character,
+        item=selected_item,
+        luck_rate=luck_rate,
+        is_win=winCondition(luck_rate),
+    )
 
 
 if __name__ == "__main__":
