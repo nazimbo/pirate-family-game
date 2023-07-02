@@ -70,7 +70,7 @@ items = [
     },
 ]
 
-
+# non utilisées
 def getCharacterLuck(characterName):
     for character in characters:
         if character["name"] == characterName:
