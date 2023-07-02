@@ -1,3 +1,5 @@
+import random
+
 from flask import Flask, render_template, request, redirect, url_for
 from flask_mysqldb import MySQL
 
@@ -16,52 +18,77 @@ characters = [
         "id": 1,
         "image": "static/images/victor.jpg",
         "description": "Le roi des pirates !",
-        "stats": {"force": 8, "luck": 6, "intelligence": 7, "charisma": 9},
+        "stats": {"force": 6, "luck": 0, "intelligence": 3, "charisma": 9}
     },
     {
         "name": "Machicoulis",
         "id": 2,
         "image": "static/images/machicoulis.jpg",
-        "description": "Le roi des pirates !",
-        "stats": {"force": 8, "luck": 6, "intelligence": 7, "charisma": 9},
+        "description": "Le plus bête des membres",
+        "stats": {"force": 8, "luck": 3, "intelligence": 0, "charisme": 3}
     },
     {
         "name": "La Sardine",
         "id": 3,
         "image": "static/images/sardine.jpg",
-        "description": "Le roi des pirates !",
-        "stats": {"force": 8, "luck": 6, "intelligence": 7, "charisma": 9},
+        "description": "Un bras cassé au comportement mou",
+        "stats": {"force": 0, "luck": 2, "intelligence": 5, "charisme": 1}
     },
     {
         "name": "Dr. Spratt",
         "id": 4,
         "image": "static/images/spratt.jpg",
-        "description": "Le roi des pirates !",
-        "stats": {"force": 8, "luck": 6, "intelligence": 7, "charisma": 9},
+        "description": "Expert quand il s'agit de tricher aux jeux",
+        "stats": {"force": 2, "luck": 1, "intelligence": 7, "charisme": 4}
     },
 ]
 
 items = [
     {
-        "name": "Sabre",
+        "name": "Carte au Trésor Ancienne",
         "id": 1,
-        "image": "static/images/sabre.jpg",
-        "description": "Un sabre de pirate",
+        "luck": random.randint(1, 10),
+        "description": "Une carte détaillée qui indique les emplacements des indices et des obstacles sur le chemin du trésor."
     },
     {
-        "name": "Pistolet",
+        "name": "Clé du Capitaine",
         "id": 2,
-        "image": "static/images/pistolet.jpg",
-        "description": "Un pistolet de pirate",
+        "luck": random.randint(1, 10),
+        "description": "Une clé spéciale qui ouvre les portes verrouillées du repaire du capitaine pirate, où le trésor est gardé en sécurité."
     },
     {
-        "name": "Boulet de canon",
+        "name": "Longue-Vue Pirate",
         "id": 3,
-        "image": "static/images/boulet.jpg",
-        "description": "Un boulet de canon de pirate",
+        "luck": random.randint(1, 10),
+        "description": "Une longue-vue puissante pour repérer les repaires pirates, les îles secrètes et les signes cachés qui mènent au trésor."
+    },
+    {
+        "name": "Boussole Magique",
+        "id": 4,
+        "luck": random.randint(1, 10),
+        "description": "Une boussole spéciale qui pointe toujours vers le trésor le plus proche, même s'il est caché."
     },
 ]
 
+def getCharacterLuck(characterName):
+    for character in characters:
+        if character == characterName:
+            return character["stats"]["luck"]
+        else:
+            return 0
+
+def getItemLuck(itemName):
+    for item in items:
+        if item == itemName:
+            return item["luck"]
+        else:
+            return 0
+
+def winCondition(luck):
+    if luck >= 80:
+        return True
+    else:
+        return False
 
 @app.route("/")
 def index():
@@ -96,8 +123,24 @@ def choose_character():
 
 @app.route("/playwith/<character>")
 def play(character):
-    character = [k for k in characters if k["name"] == character][0]["name"]
-    return render_template("play.html", character=character)
+    character = next((c for c in characters if c["name"] == character), None)
+
+    character = {
+        "name": character["name"],
+        "id": character["id"],
+        "image": character["image"],
+        "description": character["description"],
+        "stats": character["stats"]
+    }
+
+    return render_template("play.html", character=character, items=items)\
+
+@app.route("/playwithitem/<character>/<item>")
+def play_with_item(character, item):
+    selected_character = next((c for c in characters if c["name"] == character), None)
+    selected_item = next((i for i in items if i["name"] == item), None)
+    luck_rate = selected_character["stats"]["luck"] * selected_item["luck"]
+    return render_template("play-with-item.html", character=selected_character, item=selected_item, luck_rate=luck_rate, is_win=winCondition(luck_rate))
 
 
 if __name__ == "__main__":

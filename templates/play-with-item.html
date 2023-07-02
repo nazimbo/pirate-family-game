@@ -1,0 +1,16 @@
+{% extends "base.html" %} {% block content %}
+
+<div class="paysage w-full h-full grid place-items-center">
+{% if is_win %}
+    <h1 class="font-extrabold text-7xl text-yellow-400 drop-shadow-lg mb-6 text-center">GAGNÉ</h1>
+{% else %}
+    <h1 class="font-extrabold text-7xl text-yellow-400 drop-shadow-lg mb-6 text-center">PERDU</h1>
+{% endif %}
+
+{% if is_win %}
+    <p class="text-white text-center text-2xl mb-10 py-6 px-6 bg-blue-200 drop-shadow-lg rounded-lg">✨✨ Tu est riche ! Tu as trouvé le tésor ! ✨✨</p>
+{% else %}
+    <p class="text-white text-center text-2xl mb-10 py-6 px-6 bg-blue-200 drop-shadow-lg rounded-lg">❌❌ Le tésor est perdu ! Tu ne l\'a pas trouvé ! ❌❌</p>
+{% endif %}
+</div>
+{% endblock %}

@@ -18,3 +18,9 @@ a {
   background-size: cover;
   background-position: 0 -100px;
 }
+
+.paysage {
+  background-image: url(../images/paysage.jpg);
+  background-repeat: none;
+  background-size: cover;
+}

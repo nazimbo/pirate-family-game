@@ -1,27 +1,28 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1 class="font-extrabold text-7xl text-yellow-400 drop-shadow-lg mb-6 text-center">Choose Your Character</h1>
-<div class="flex justify-around">
-  {% for character in characters %}
-  <p>{{ character.index }}</p>
-  <a id="character-{{ character.id }}" href="{{ url_for('play', character=character.name) }}"
-    class="characters-box my-4 rounded-lg p-2 bg-yellow-300 hover:bg-yellow-400 hover:shadow-lg">
-    <h2 class="text-xl text-center">{{ character.name }}</h2>
-    <div class="w-80 h-44 rounded-lg overflow-hidden">
-      <img class="w-full" src="{{ character.image }}" />
+<div class="paysage w-full h-full grid place-items-center">
+    <h1 class="font-extrabold text-7xl text-yellow-400 drop-shadow-lg mb-6 text-center">Choose Your Character</h1>
+    <div class="flex justify-around text-white">
+      {% for character in characters %}
+      <a id="character-{{ character.id }}" href="{{ url_for('play', character=character.name) }}"
+        class="characters-box my-4 rounded-lg p-2 bg-yellow-300 hover:bg-yellow-400 hover:shadow-lg mx-10">
+        <h2 class="text-4xl font-bold text-center">{{ character.name }}</h2>
+        <div class="w-80 h-44 rounded-lg overflow-hidden">
+          <img class="w-full" src="{{ character.image }}" />
+        </div>
+        <p class="text-center text-2xl font-bold mb-2">{{character.description}}</p>
+        <p class="text-xl font-bold mb-2">Stats</p>
+        <ul>
+          <li><span class="font-bold">Force:</span> {{character.stats.force}}</li>
+          <li><span class="font-bold">Chance:</span> {{character.stats.luck}}</li>
+          <li><span class="font-bold">Intelligence:</span> {{character.stats.intelligence}}</li>
+          <li><span class="font-bold">Charisme:</span> {{character.stats.charisma}}</li>
+        </ul>
+        <button class="primary-button">
+        </button>
+      </a>
+      {% endfor %}
     </div>
-    <p class="text-center text-lg font-bold mb-2">{{character.description}}</p>
-    <p class="text-lg font-bold">Stats:</p>
-    <ul>
-      <li><span class="font-bold">Force:</span> {{character.stats.force}}</li>
-      <li><span class="font-bold">Chance:</span> {{character.stats.luck}}</li>
-      <li><span class="font-bold">Intelligence:</span> {{character.stats.intelligence}}</li>
-      <li><span class="font-bold">Charisme:</span> {{character.stats.charisma}}</li>
-    </ul>
-    <button class="primary-button">
-    </button>
-  </a>
-  {% endfor %}
 </div>
 {% endblock %}
