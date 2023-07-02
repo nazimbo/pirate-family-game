@@ -18,28 +18,28 @@ characters = [
         "id": 1,
         "image": "static/images/victor.jpg",
         "description": "Le roi des pirates !",
-        "stats": {"force": 6, "luck": 0, "intelligence": 3, "charisma": 9}
+        "stats": {"force": 6, "luck": 2, "intelligence": 3, "charisma": 9}
     },
     {
         "name": "Machicoulis",
         "id": 2,
         "image": "static/images/machicoulis.jpg",
         "description": "Le plus bête des membres",
-        "stats": {"force": 8, "luck": 3, "intelligence": 0, "charisme": 3}
+        "stats": {"force": 8, "luck": 5, "intelligence": 0, "charisme": 3}
     },
     {
         "name": "La Sardine",
         "id": 3,
         "image": "static/images/sardine.jpg",
         "description": "Un bras cassé au comportement mou",
-        "stats": {"force": 0, "luck": 2, "intelligence": 5, "charisme": 1}
+        "stats": {"force": 0, "luck": 4, "intelligence": 5, "charisme": 1}
     },
     {
         "name": "Dr. Spratt",
         "id": 4,
         "image": "static/images/spratt.jpg",
         "description": "Expert quand il s'agit de tricher aux jeux",
-        "stats": {"force": 2, "luck": 1, "intelligence": 7, "charisme": 4}
+        "stats": {"force": 2, "luck": 3, "intelligence": 7, "charisme": 4}
     },
 ]
 
@@ -47,25 +47,25 @@ items = [
     {
         "name": "Carte au Trésor Ancienne",
         "id": 1,
-        "luck": random.randint(1, 10),
+        "luck": random.randint(1, 50),
         "description": "Une carte détaillée qui indique les emplacements des indices et des obstacles sur le chemin du trésor."
     },
     {
         "name": "Clé du Capitaine",
         "id": 2,
-        "luck": random.randint(1, 10),
+        "luck": random.randint(1, 50),
         "description": "Une clé spéciale qui ouvre les portes verrouillées du repaire du capitaine pirate, où le trésor est gardé en sécurité."
     },
     {
         "name": "Longue-Vue Pirate",
         "id": 3,
-        "luck": random.randint(1, 10),
+        "luck": random.randint(1, 50),
         "description": "Une longue-vue puissante pour repérer les repaires pirates, les îles secrètes et les signes cachés qui mènent au trésor."
     },
     {
         "name": "Boussole Magique",
         "id": 4,
-        "luck": random.randint(1, 10),
+        "luck": random.randint(1, 50),
         "description": "Une boussole spéciale qui pointe toujours vers le trésor le plus proche, même s'il est caché."
     },
 ]
