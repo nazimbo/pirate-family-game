@@ -5,7 +5,7 @@
 <div class="flex justify-around">
   {% for character in characters %}
   <a href="{{ url_for('play', character=character.name) }}"
-    class="characters-box my-4 rounded-lg p-2 bg-yellow-400 hover:bg-yellow-300 hover:shadow-lg">
+    class="characters-box my-4 rounded-lg p-2 bg-yellow-300 hover:bg-yellow-400 hover:shadow-lg">
     <h2 class="text-xl text-center">{{ character.name }}</h2>
     <div class="w-80 h-44 rounded-lg overflow-hidden">
       <img class="w-full" src="{{ character.image }}" />
